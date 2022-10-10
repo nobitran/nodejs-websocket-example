@@ -1,32 +1,32 @@
 pipeline{
     agent any
     stages{
-        stage("A"){
+        stage("build"){
             steps{
-                echo "========executing A========"
+                echo "Building"
             }
-            post{
-                always{
-                    echo "========always========"
-                }
-                success{
-                    echo "========A executed successfully========"
-                }
-                failure{
-                    echo "========A execution failed========"
-                }
+        
+        }
+        stage("test"){
+            steps{
+                echo "Testing"
             }
+        
         }
-    }
-    post{
-        always{
-            echo "========always========"
-        }
-        success{
-            echo "========pipeline executed successfully ========"
-        }
-        failure{
-            echo "========pipeline execution failed========"
+        stage("deploy"){
+            withCredentials([
+                usernamePassword(
+                    credentials: 'demo-account', 
+                    usernameVariable: USER, 
+                    passwordVariable: PWD
+                )
+            ])
+            steps{
+                echo "Deploying"
+                echo "USER: $USER"
+                echo "PWD: $PWD"
+            }
+
         }
     }
 }
