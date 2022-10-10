@@ -19,7 +19,7 @@ pipeline{
                 echo "Deploying"
                 withCredentials([
                     usernamePassword(
-                        credentials: 'demo-account', 
+                        credentialsId: 'demo-account', 
                         usernameVariable: 'USER', 
                         passwordVariable: 'PWD'
                     )
