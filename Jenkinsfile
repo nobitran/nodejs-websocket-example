@@ -39,10 +39,17 @@ pipeline{
         
         }
         stage("deploy"){
-            
+            input {
+                message "Select ENV"
+                ok "Done"
+                parameters {
+                    choice(name: 'ENV', choices: ['dev', 'staging', 'prod'], description: 'Choose ENV')
+                }
+            }
             steps{
                 script {
                     gv.deployApp()
+                    echo "ENV $ENV"
                 }
                 withCredentials([
                     usernamePassword(
