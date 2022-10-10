@@ -48,6 +48,9 @@ pipeline{
             }
             steps{
                 script {
+                    env.ROLE = message: "Select Role", ok: "Done", parameters: [
+                        choice(name: 'ENV', choices: ['dev', 'staging', 'prod'], description: 'Choose ENV')
+                        ]
                     gv.deployApp()
                     echo "ENV $ENV"
                 }
