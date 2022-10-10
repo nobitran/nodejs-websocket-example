@@ -20,12 +20,15 @@ pipeline{
                 withCredentials([
                     usernamePassword(
                         credentials: 'demo-account', 
-                        usernameVariable: USER, 
-                        passwordVariable: PWD
+                        usernameVariable: 'USER', 
+                        passwordVariable: 'PWD'
                     )
                 ]) {
-                    sh "echo ${USER}"
-                    sh "echo $PWD"
+                    sh 'echo $PASSWORD'
+                    // also available as a Groovy variable
+                    echo USERNAME
+                    // or inside double quotes for string interpolation
+                    echo "username is $USERNAME"
                 }
             }
 
