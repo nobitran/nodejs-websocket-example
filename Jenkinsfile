@@ -1,5 +1,8 @@
 pipeline{
     agent any
+    tools {
+        nodejs 'node-18.10.0'
+    }
     stages{
         stage("build"){
             steps{
@@ -20,8 +23,8 @@ pipeline{
                 withCredentials([
                     usernamePassword(
                         credentialsId: 'demo-account', 
-                        usernameVariable: 'USER', 
-                        passwordVariable: 'PWD'
+                        usernameVariable: 'USERNAME', 
+                        passwordVariable: 'PASSWORD'
                     )
                 ]) {
                     sh 'echo $PASSWORD'
