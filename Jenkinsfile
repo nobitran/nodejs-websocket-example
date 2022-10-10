@@ -14,17 +14,19 @@ pipeline{
         
         }
         stage("deploy"){
-            withCredentials([
-                usernamePassword(
-                    credentials: 'demo-account', 
-                    usernameVariable: USER, 
-                    passwordVariable: PWD
-                )
-            ])
+            
             steps{
                 echo "Deploying"
-                echo "USER: $USER"
-                echo "PWD: $PWD"
+                withCredentials([
+                    usernamePassword(
+                        credentials: 'demo-account', 
+                        usernameVariable: USER, 
+                        passwordVariable: PWD
+                    )
+                ]) {
+                    echo "USER: $USER"
+                    echo "PWD: $PWD"
+                }
             }
 
         }
