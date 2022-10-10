@@ -24,8 +24,8 @@ pipeline{
                         passwordVariable: PWD
                     )
                 ]) {
-                    echo "USER: $USER"
-                    echo "PWD: $PWD"
+                    sh "echo ${USER}"
+                    sh "echo $PWD"
                 }
             }
 
