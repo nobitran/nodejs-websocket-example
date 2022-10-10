@@ -1,3 +1,5 @@
+def gv
+
 pipeline{
     agent any
     tools {
@@ -8,10 +10,16 @@ pipeline{
         booleanParam(name: 'executeTests', defaultValue: true, description: 'Execute test')
     }
     stages{
+        stage("init"){
+            script {
+                gv = load "script.groovy"
+            }
+        }
         stage("build"){
             steps{
-                echo "Building"
-                 sh "npm install"
+                script {
+                    gv.buildApp()
+                }
             }
         
         }
@@ -22,14 +30,18 @@ pipeline{
                 }
             }
             steps{
-                echo "Testing"
+                script {
+                    gv.testApp()
+                }
             }
         
         }
         stage("deploy"){
             
             steps{
-                echo "Deploying version ${params.VERSION}"
+                script {
+                    gv.deployApp()
+                }
                 withCredentials([
                     usernamePassword(
                         credentialsId: 'demo-account', 
