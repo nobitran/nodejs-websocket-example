@@ -2,7 +2,7 @@ def gv
 
 pipeline{
     agent {
-        dockerfile = true
+        dockerfile true
     }
     tools {
         nodejs 'node-18.10.0'
