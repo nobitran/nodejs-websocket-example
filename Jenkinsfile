@@ -4,6 +4,7 @@ pipeline{
     agent any
     tools {
         nodejs 'node-18.10.0'
+        docker 'docker'
     }
     stages{
         stage("init"){
