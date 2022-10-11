@@ -8,9 +8,6 @@ def testApp() {
 }
 
 def deployApp() {
-  sh "systemctl start docker"
-  sh "systemctl enable docker"
-  sh "usermod -aG docker jenkins"
   echo "Deploying app ..."
 }
 

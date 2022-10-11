@@ -1,7 +1,9 @@
 def gv
 
 pipeline{
-    agent any
+    agent {
+        dockerfile = true
+    }
     tools {
         nodejs 'node-18.10.0'
         dockerTool 'docker'
