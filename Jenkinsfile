@@ -5,10 +5,6 @@ pipeline{
     tools {
         nodejs 'node-18.10.0'
     }
-    parameters {
-        choice(name: 'VERSION', choices: ['1.1', '1.2', '1.3'], description: 'Choose version')
-        booleanParam(name: 'executeTests', defaultValue: true, description: 'Execute test')
-    }
     stages{
         stage("init"){
             steps {

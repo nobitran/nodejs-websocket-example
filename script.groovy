@@ -8,8 +8,7 @@ def testApp() {
 }
 
 def deployApp() {
-  echo "Deploying version ${params.VERSION}"
-  echo "Deploying with role $ROLE"
+  echo "Deploying app ..."
 }
 
 
