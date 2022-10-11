@@ -17,55 +17,22 @@ pipeline{
                 }
             }
         }
-        stage("build"){
+        stage("build image"){
+
             steps{
                 script {
-                    gv.buildApp()
-                }
-            }
-        
-        }
-        stage("test"){
-            when {
-                expression {
-                    params.executeTests
-                }
-            }
-            steps{
-                script {
-                    gv.testApp()
-                }
-            }
-        
-        }
-        stage("deploy"){
-            input {
-                message "Select ENV"
-                ok "Done"
-                parameters {
-                    choice(name: 'ENV', choices: ['dev', 'staging', 'prod'], description: 'Choose ENV')
-                }
-            }
-            steps{
-                script {
-                    env.ROLE = input message: "Select Role", ok: "Done", parameters: [
-                        choice(name: 'ENV', choices: ['dev', 'staging', 'prod'], description: 'Choose ENV')
-                        ]
                     gv.deployApp()
-                    echo "ENV $ENV"
                 }
                 withCredentials([
                     usernamePassword(
-                        credentialsId: 'demo-account', 
+                        credentialsId: 'dockerhub', 
                         usernameVariable: 'USERNAME', 
                         passwordVariable: 'PASSWORD'
                     )
                 ]) {
-                    sh 'echo $PASSWORD'
-                    // also available as a Groovy variable
-                    echo USERNAME
-                    // or inside double quotes for string interpolation
-                    echo "username is $USERNAME"
+                    sh 'docker build -t nobitran/node-app:1.0 .'
+                    sh "echo $PASSWORD | docker login -u $USERNAME --password-stdin"
+                    sh 'docker push nobitran/node-app:1.0'
                 }
             }
 
