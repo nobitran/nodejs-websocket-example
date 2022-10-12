@@ -21,7 +21,7 @@ pipeline{
             }
             steps{
                 script {
-                    buildImage()
+                    buildImage 'nobitran/node-app:1.1' 'dockerhub'
                 }
             }
         }
