@@ -1,5 +1,5 @@
 def buildApp() {
-  echo "Building app ...";
+  echo "Building app ... with $BRANCH_NAME";
   withCredentials([
       usernamePassword(
           credentialsId: 'dockerhub', 
@@ -15,11 +15,11 @@ def buildApp() {
 }
 
 def testApp() {
-  echo "Testing app ...";
+  echo "Testing app ... with $BRANCH_NAME";
 }
 
 def deployApp() {
-  echo "Deploying app ..."
+  echo "Deploying app ... with $BRANCH_NAME";
 }
 
 
