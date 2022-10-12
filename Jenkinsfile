@@ -1,13 +1,7 @@
 def gv
 
 pipeline{
-    agent {
-        dockerfile true
-    }
-    tools {
-        nodejs 'node-18.10.0'
-        dockerTool 'docker'
-    }
+    agent any
     stages{
         stage("init"){
             steps {
