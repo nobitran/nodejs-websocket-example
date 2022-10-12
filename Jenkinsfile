@@ -11,12 +11,19 @@ pipeline{
             }
         }
         stage("build image"){
-
             steps{
                 script {
                     gv.buildApp()
                 }
             }
         }
+        stage("deploy"){
+            steps{
+                script {
+                    gv.deployApp()
+                }
+            }
+        }
+        
     }
 }
