@@ -21,7 +21,7 @@ pipeline{
             }
             steps{
                 script {
-                    gv.buildImage('nobitran/node-app:1.3','dockerhub')
+                    gv.buildImage('nobitran/node-app', 1, 'dockerhub')
                 }
             }
         }

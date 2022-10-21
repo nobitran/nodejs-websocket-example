@@ -6,7 +6,7 @@ def deployApp() {
   echo "Deploying app ... with $BRANCH_NAME";
 }
 
-def buildImage(imageName, creId) {
+def buildImage(imageName, version, creId) {
   echo "Building app ... with $BRANCH_NAME"
   withCredentials([
       usernamePassword(
@@ -17,7 +17,7 @@ def buildImage(imageName, creId) {
   ]) {
       sh "docker build -t $imageName ."
       sh "echo $PASSWORD | docker login -u $USERNAME --password-stdin"
-      sh "docker push $imageName"
+      sh "docker push $imageName:$version.$BUILD_NUMBER"
       echo "Pushed image to dockerhub"
   }
 }
