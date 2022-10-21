@@ -16,7 +16,7 @@ pipeline{
         stage("build image"){
             when {
                 expression {
-                    BRANCH_NAME == "master"
+                    BRANCH_NAME == "feature/update-version"
                 }
             }
             steps{
