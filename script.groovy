@@ -13,7 +13,7 @@ def buildImage(imageName, version, creId) {
   def matcher = readJSON file: 'package.json'
   echo matcher.version;
   matcher.version = "1.1.1"
-  writeJSON file: 'package.json' json: matcher.toString()
+  writeJSON file: 'package.json', json: matcher.toString()
 
   def latest_matcher = readJSON file: 'package.json'
   echo latest_matcher.version;
