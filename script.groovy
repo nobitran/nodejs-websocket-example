@@ -11,8 +11,12 @@ def buildImage(imageName, version, creId) {
   def version_name = "$imageName:$version.$BUILD_NUMBER"
   echo "Version: $version_name"
   def matcher = readJSON file: 'package.json'
-  echo matcher;
-  echo matcher['version'];
+  echo matcher.version;
+  matcher.version = "1.1.1"
+  writeJSON file: 'package.json' json: matcher
+
+  def latest_matcher = readJSON file: 'package.json'
+  echo latest_matcher.version;
   // withCredentials([
   //     usernamePassword(
   //         credentialsId: creId,
