@@ -10,8 +10,9 @@ def buildImage(imageName, version, creId) {
   echo "Building app ... with $BRANCH_NAME"
   def version_name = "$imageName:$version.$BUILD_NUMBER"
   echo "Version: $version_name"
-  def matcher = readFile('package.json') =~ '"version": "1.0.0"'
+  def matcher = readJSON file: 'package.json')
   echo matcher;
+  echo matcher['version'];
   // withCredentials([
   //     usernamePassword(
   //         credentialsId: creId,
