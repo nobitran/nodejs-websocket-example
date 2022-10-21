@@ -1,6 +1,6 @@
 #!/usr/bin/env groovy
 
-@Library('jenkins-share-library')
+// @Library('jenkins-share-library')
 def gv
 
 pipeline{
@@ -21,7 +21,7 @@ pipeline{
             }
             steps{
                 script {
-                    buildImage('nobitran/node-app:1.2','dockerhub')
+                    gv.buildImage('nobitran/node-app:1.3','dockerhub')
                 }
             }
         }
