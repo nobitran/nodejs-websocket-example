@@ -18,18 +18,8 @@ def updateVersion(imageName, creId) {
 
   def latest_matcher = readJSON file: 'package.json'
   echo latest_matcher.version;
-  // withCredentials([
-  //     usernamePassword(
-  //         credentialsId: creId,
-  //         usernameVariable: 'USERNAME',
-  //         passwordVariable: 'PASSWORD'
-  //     )
-  // ]) {
-  //     sh "docker build -t $imageName ."
-  //     sh "echo $PASSWORD | docker login -u $USERNAME --password-stdin"
-  //     sh "docker push"
-  //     echo "Pushed image to dockerhub"
-  // }
+  def new_name = imageName + ':' + latest_matcher.version
+  buildImage(new_name, creId)
 }
 
 
