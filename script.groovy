@@ -11,11 +11,13 @@ def getCurrentVersion() {
   return matcher.version;
 }
 
-def buildImageAndUpdateVersion(imageName, version, creId) {
+def buildImageAndUpdateVersion(imageName, creId) {
+  def version = gv.getCurrentVersion()
+  def new_version = increaseVersion(version, 'major')
   echo "imageName: $imageName"
   echo "Building app ... with $BRANCH_NAME"
   def matcher = readJSON file: 'package.json'
-  matcher.version = version;
+  matcher.version = new_version;
 
   writeJSON file: 'package.json', json: matcher.toString()
 

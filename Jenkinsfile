@@ -21,9 +21,7 @@ pipeline{
             // }
             steps{
                 script {
-                    def version = gv.getCurrentVersion()
-                    def new_version = increaseVersion(version)
-                    gv.buildImageAndUpdateVersion('nobitran/node-app', new_version, 'dockerhub')
+                    gv.buildImage('nobitran/node-app', 'dockerhub')
                 }
             }
         }
