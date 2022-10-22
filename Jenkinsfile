@@ -1,6 +1,6 @@
 #!/usr/bin/env groovy
 
-// @Library('jenkins-share-library')
+@Library('jenkins-share-library')
 def gv
 
 pipeline{
@@ -16,12 +16,12 @@ pipeline{
         stage("build image"){
             when {
                 expression {
-                    BRANCH_NAME == "feature/update-version"
+                    BRANCH_NAME == "master"
                 }
             }
             steps{
                 script {
-                    gv.buildImage('nobitran/node-app', 1, 'dockerhub')
+                    gv.buildImage('nobitran/node-app', 'dockerhub')
                 }
             }
         }
