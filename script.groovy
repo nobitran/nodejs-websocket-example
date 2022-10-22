@@ -6,14 +6,17 @@ def deployApp() {
   echo "Deploying app ... with $BRANCH_NAME new";
 }
 
-def buildImageAndUpdateVersion(imageName, creId) {
+def getCurrentVersion() {
+  def matcher = readJSON file: 'package.json'
+  return matcher.version;
+}
+
+def buildImageAndUpdateVersion(imageName, version, creId) {
   echo "imageName: $imageName"
   echo "Building app ... with $BRANCH_NAME"
-  def version_name = "$imageName:$version.$BUILD_NUMBER"
-  echo "Version: $version_name"
   def matcher = readJSON file: 'package.json'
-  echo matcher.version;
-  matcher.version = increaseVersion(matcher.version)
+  matcher.version = version;
+
   writeJSON file: 'package.json', json: matcher.toString()
 
   def latest_matcher = readJSON file: 'package.json'
