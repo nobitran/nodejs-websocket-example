@@ -6,17 +6,12 @@ def deployApp() {
   echo "Deploying app ... with $BRANCH_NAME new";
 }
 
-def getCurrentVersion() {
-  def matcher = readJSON file: 'package.json'
-  return matcher.version;
-}
 
-def buildImageAndUpdateVersion(imageName, creId) {
-  def version = gv.getCurrentVersion()
-  def new_version = increaseVersion(version, 'major')
+def updateVersion(imageName, creId) {
   echo "imageName: $imageName"
   echo "Building app ... with $BRANCH_NAME"
   def matcher = readJSON file: 'package.json'
+  def new_version = increaseVersion(matcher.version, 'major')
   matcher.version = new_version;
 
   writeJSON file: 'package.json', json: matcher.toString()
