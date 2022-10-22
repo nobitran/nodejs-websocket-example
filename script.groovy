@@ -1,12 +1,13 @@
 def testApp() {
-  echo "Testing app ... with $BRANCH_NAME";
+  echo "Testing app ... with $BRANCH_NAME new";
 }
 
 def deployApp() {
-  echo "Deploying app ... with $BRANCH_NAME";
+  echo "Deploying app ... with $BRANCH_NAME new";
 }
 
-def buildImage(imageName, version, creId) {
+def buildImageAndUpdateVersion(imageName, creId) {
+  echo "imageName: $imageName"
   echo "Building app ... with $BRANCH_NAME"
   def version_name = "$imageName:$version.$BUILD_NUMBER"
   echo "Version: $version_name"
