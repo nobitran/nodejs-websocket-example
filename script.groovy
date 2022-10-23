@@ -20,6 +20,7 @@ def updateVersion(imageName, creId) {
   echo latest_matcher.version;
   def new_name = imageName + ':' + latest_matcher.version
   buildImage(new_name, creId)
+  commitVersion()
 }
 
 def commitVersion() {
