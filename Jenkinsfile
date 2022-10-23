@@ -14,11 +14,6 @@ pipeline{
             }
         }
         stage("build image"){
-            // when {
-            //     expression {
-            //         BRANCH_NAME == "master"
-            //     }
-            // }
             steps{
                 script {
                     gv.updateVersion('nobitran/node-app', 'dockerhub')
