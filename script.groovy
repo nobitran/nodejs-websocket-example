@@ -37,7 +37,7 @@ def commitVersion() {
       sh 'git branch'
       sh 'git config --list'
 
-      sh 'git remote set-url origin https://$USERNAME:$PASSWORD@github.com:nobitran/nodejs-websocket-example.git'
+      sh 'git remote set-url origin https://$USERNAME:$PASSWORD@github.com/nobitran/nodejs-websocket-example.git'
       sh "git add ."
       sh 'git commit -m "feat: update version in CI"'
       sh "git push origin HEAD:$BRANCH_NAME"
