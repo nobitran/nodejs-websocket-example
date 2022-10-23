@@ -14,7 +14,7 @@ def updateVersion(imageName, creId) {
   def new_version = increaseVersion(matcher.version, 'major')
   matcher.version = new_version;
 
-  writeJSON file: 'package.json', json: matcher.toString()
+  writeJSON file: 'package.json', json: matcher.toString(), pretty: 2
 
   def latest_matcher = readJSON file: 'package.json'
   echo latest_matcher.version;
