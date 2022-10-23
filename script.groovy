@@ -33,10 +33,6 @@ def commitVersion() {
   ]) {
       sh 'git config user.email "jenkins@gmail.com"'
       sh 'git config user.username "jenkins"'
-
-      sh 'git branch'
-      sh 'git config --list'
-
       sh 'git remote set-url origin https://$USERNAME:$PASSWORD@github.com/nobitran/nodejs-websocket-example.git'
       sh "git add ."
       sh 'git commit -m "feat: update version in CI"'
