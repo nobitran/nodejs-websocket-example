@@ -55,6 +55,7 @@ def commitVersion(new_version) {
       sh 'git config user.email "jenkins@gmail.com"'
       sh 'git config user.username "jenkins"'
       sh 'git remote set-url origin https://$USERNAME:$PASSWORD@github.com/nobitran/nodejs-websocket-example.git'
+      sh 'git pull'
       sh "git add ."
       sh 'git commit -m "feat: update $new_version in CI"'
       sh "git push origin HEAD:$BRANCH_NAME"
