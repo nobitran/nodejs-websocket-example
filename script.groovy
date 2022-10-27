@@ -16,11 +16,14 @@ def deployApp() {
       string(credentialsId: 'ec2-ip', variable: 'EC2_IP')
   ]) {
     def remote = [:]
+    echo "User: $USERNAME"
+    echo "KEY_FILE: $KEY_FILE"
+    echo "EC2_IP: $EC2_IP"
     remote.name = USERNAME
     remote.host = EC2_IP
     remote.user = USERNAME
-    remote.allowAnyHosts = true
     remote.identityFile = KEY_FILE
+    remote.allowAnyHosts = true
     sshCommand remote: remote, command: "echo 'Hello world' >> log.txt"
     sshCommand remote: remote, command: "docker run -p 80:3000 nobitran/node-app:$current_version"
     sshCommand remote: remote, command: "docker ps"
