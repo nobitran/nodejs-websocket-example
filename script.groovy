@@ -1,11 +1,31 @@
 def testApp() {
-  echo "Testing app ... with $BRANCH_NAME new";
+  echo "Testing app ... with $BRANCH_NAME";
 }
+
+current_version = "1.0.0"
 
 def deployApp() {
-  echo "Deploying app ... with $BRANCH_NAME new";
+  echo "Deploying app ... with $BRANCH_NAME";
+  echo "Current version: $current_version"
+  withCredentials([
+      sshUserPrivateKey(
+          credentialsId: 'ec2-ssh',
+          usernameVariable: 'USERNAME',
+          keyFileVariable: 'KEY_FILE',
+      ),
+      string(credentialsId: 'ec2-ip', variable: 'EC2_IP')
+  ]) {
+    def remote = [:]
+    remote.name = USERNAME
+    remote.host = EC2_IP
+    remote.user = USERNAME
+    remote.allowAnyHosts = true
+    remote.identityFile = KEY_FILE
+    sshCommand remote: remote, command: "echo 'Hello world' >> log.txt"
+    sshCommand remote: remote, command: "docker run -p 80:3000 nobitran/node-app:$current_version"
+    sshCommand remote: remote, command: "docker ps"
+  }
 }
-
 
 def updateVersion(imageName, creId) {
   echo "imageName: $imageName"
@@ -24,6 +44,7 @@ def updateVersion(imageName, creId) {
 }
 
 def commitVersion(new_version) {
+  current_version = new_version
   withCredentials([
       usernamePassword(
           credentialsId: 'nobitran-github',

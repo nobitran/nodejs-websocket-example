@@ -6,6 +6,8 @@ WORKDIR /home/app
 
 COPY . /home/app/
 
+RUN npm install
+
 CMD ["node", "server.js"]
 
 EXPOSE 3000 40510
