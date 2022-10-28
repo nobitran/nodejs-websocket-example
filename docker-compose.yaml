@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   node-app:
-    image: 321245276922.dkr.ecr.ap-southeast-1.amazonaws.com/node-app:1.0
+    build: .
     ports:
       - 3000:3000
       - 40510:40510

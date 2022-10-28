@@ -14,14 +14,9 @@ pipeline{
             }
         }
         stage("build image"){
-            when {
-                expression {
-                    BRANCH_NAME == "master"
-                }
-            }
             steps{
                 script {
-                    buildImage('nobitran/node-app:1.2','dockerhub')
+                    gv.updateVersion('nobitran/node-app', 'dockerhub')
                 }
             }
         }
@@ -38,11 +33,6 @@ pipeline{
             }
         }
         stage("deploy"){
-            when {
-                expression {
-                    BRANCH_NAME == "master"
-                }
-            }
             steps{
                 script {
                     gv.deployApp()
@@ -50,5 +40,15 @@ pipeline{
             }
         }
         
+    }
+    post {
+        // Clean after build
+        always {
+            cleanWs(cleanWhenNotBuilt: false,
+                    deleteDirs: true,
+                    disableDeferredWipeout: true,
+                    notFailBuild: true,
+                   )
+        }
     }
 }
