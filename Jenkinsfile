@@ -1,6 +1,14 @@
 #!/usr/bin/env groovy
 
-@Library('jenkins-share-library')
+// global share library
+// @Library('jenkins-share-library')
+
+// dynamic import
+library identifier: 'jenkins-share-library@main', retriever: modernSCM(
+  [$class: 'GitSCMSource',
+   remote: 'https://github.com/nobitran/jenkins-share-library.git',
+   credentialsId: 'nobitran-github'])
+
 def gv
 
 pipeline{
