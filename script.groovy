@@ -24,7 +24,8 @@ def deployApp() {
     remote.user = USERNAME
     remote.identityFile = KEY_FILE
     remote.allowAnyHosts = true
-    sshCommand remote: remote, command: "docker run -p 80:3000 -d nobitran/node-app:$current_version"
+    sshPut remote: remote, from: 'docker-compose.yaml', into: '.'
+    sshCommand remote: remote, command: "docker-compose up -d"
     sshCommand remote: remote, command: "docker ps"
   }
 }
