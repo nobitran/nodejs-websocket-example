@@ -25,7 +25,7 @@ def deployApp() {
     remote.identityFile = KEY_FILE
     remote.allowAnyHosts = true
     sshPut remote: remote, from: 'docker-compose.yaml', into: '.'
-    sshCommand remote: remote, command: "docker-compose up -d --build"
+    sshCommand remote: remote, command: "docker-compose pull && docker-compose up -d"
     sshCommand remote: remote, command: "docker ps"
   }
 }
